@@ -1,0 +1,6 @@
+#+TITLE:   input/rime
+#+DATE:    May 13, 2019
+#+SINCE:   2.1
+#+STARTUP: inlineimages
+
+rime
