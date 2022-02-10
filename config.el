@@ -24,8 +24,8 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-;; common theme list: doom-one doom-one-light doom-city-lights doom-moonlight doom-nord-light
-(setq doom-theme 'doom-one)
+;; common theme list: doom-one doom-one-light doom-city-lights doom-nord-light
+(setq doom-theme 'doom-nord-light)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -81,6 +81,16 @@
         ("Wolfram alpha" "https://wolframalpha.com/input/?i=%s")
         ("Wikipedia" "https://wikipedia.org/search-redirect.php?language=en&go=Go&search=%s")))
 
+;;; set chinese font
+(if (display-graphic-p) (dolist (charset '(kana han cjk-misc bopomofo))
+   (set-fontset-font (frame-parameter nil 'font) charset
+                     (font-spec :family "WenQuanYi Zen Hei Mono" ))))
+
+(setq doom-font (font-spec :family "WenQuanYi Micro Hei Mono" :size 22)
+      doom-variable-pitch-font (font-spec :family "WenQuanYi Micro Hei Mono" :size 22)
+      doom-unicode-font (font-spec :family "WenQuanYi Zen Hei Mono" :size 22)
+      doom-serif-font (font-spec :family "WenQuanYi Zen Hei Mono" :size 22)
+      doom-big-font (font-spec :family "WenQuanYi Micro Hei Mono" :size 22))
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
