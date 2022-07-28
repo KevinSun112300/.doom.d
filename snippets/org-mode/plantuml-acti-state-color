@@ -1,0 +1,7 @@
+# -*- mode: org-mode -*-
+# name: plantuml-acti-state-color
+# uuid: sun-plantuml-acti-state-color
+# key: plantuml-acti-state-color
+# condition: t
+# --
+#palegreen:$0;

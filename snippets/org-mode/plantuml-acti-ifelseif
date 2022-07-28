@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: plantuml-acti-ifelseif
+# uuid: sun-plantuml-acti-ifelseif
+# key: plantuml-acti-ifelseif
+# condition: t
+# --
+if ($1) then (yes)
+  :$2;
+elseif ($3) then (yes)
+  :$4;
+else (no)
+  :$5;
+endif

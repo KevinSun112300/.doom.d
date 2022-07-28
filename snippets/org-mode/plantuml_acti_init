@@ -1,0 +1,12 @@
+# -*- mode: org-mode -*-
+# name: plantuml_acti_init
+# uuid: sun_plantuml_acti_init
+# key: plantuml_acti_init
+# condition: t
+# --
+
+#+BEGIN_SRC plantuml :file ./$1.png
+start
+:$0;
+stop
+#+END_SRC

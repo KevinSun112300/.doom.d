@@ -47,3 +47,5 @@
 ;(package! builtin-package :recipe (:branch "develop"))
 (package! mvn)
 (package! java-snippets)
+(package! plantuml-mode   :recipe (:local-repo  "/home/sun/setup/github/plantuml-mode"))
+(package! org)

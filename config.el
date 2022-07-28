@@ -25,7 +25,8 @@
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 ;; common theme list: doom-one doom-one-light doom-city-lights doom-nord-light
-(setq doom-theme 'doom-nord-light)
+;; modify doom-theme variable, then run M-x doom/reload-them
+(setq doom-theme 'doom-one)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -85,12 +86,12 @@
 (if (display-graphic-p) (dolist (charset '(kana han cjk-misc bopomofo))
    (set-fontset-font (frame-parameter nil 'font) charset
                      (font-spec :family "WenQuanYi Zen Hei Mono" ))))
-
-(setq doom-font (font-spec :family "WenQuanYi Micro Hei Mono" :size 22)
-      doom-variable-pitch-font (font-spec :family "WenQuanYi Micro Hei Mono" :size 22)
-      doom-unicode-font (font-spec :family "WenQuanYi Zen Hei Mono" :size 22)
-      doom-serif-font (font-spec :family "WenQuanYi Zen Hei Mono" :size 22)
-      doom-big-font (font-spec :family "WenQuanYi Micro Hei Mono" :size 22))
+;; size 22
+(setq doom-font (font-spec :family "WenQuanYi Micro Hei Mono")
+      doom-variable-pitch-font (font-spec :family "WenQuanYi Micro Hei Mono")
+      doom-unicode-font (font-spec :family "WenQuanYi Zen Hei Mono")
+      doom-serif-font (font-spec :family "WenQuanYi Zen Hei Mono")
+      doom-big-font (font-spec :family "WenQuanYi Micro Hei Mono"))
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
@@ -108,3 +109,7 @@
 ;;
 ;; You can also try 'gd' (or 'C-c g d') to jump to their definition and see how
 ;; they are implemented.
+
+(map! :leader
+      (:prefix ("C-a" . "some my keys")
+          :desc "avy goto char" "C-y" #'avy-goto-char))

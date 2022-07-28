@@ -1,0 +1,71 @@
+# -*- mode: org-mode -*-
+# name: plantuml
+# uuid: sun-org-plantuml
+# key: plantuml
+# condition: t
+# --
+
+* 测试网部署图
+#+BEGIN_SRC plantuml :file ./testDeploy.png
+
+legend
+|= 组件颜色  |= 网络环境 |
+|<back:yellow>  </back>| 办公网 |
+|其它| 内网或者三方组件 |
+endlegend
+
+
+database pg[
+pg数据库 mediaDBTest
+====
+202.99.114.60:5100/mediaDBTest
+]
+
+
+database redis[
+redis 队列
+====
+192.168.22.215:6479/13
+]
+
+
+
+package 192.168.22.216 {
+
+        stack mediaManagementSys #yellow[
+        媒资库后台管理系统服务接口
+        ===
+        192.168.22.216:9088
+        ]
+        component medialib-scraping [
+        java爬虫辅助服务
+        ===
+        ]
+
+}
+package 192.168.22.202 {
+
+        agent nginx [
+        nginx
+        ===
+        http://192.168.22.202:21316/cms
+        ===
+        端口：21316
+        ]
+
+}
+
+
+pg -- mediaManagementSys
+mediaManagementSys ---> redis : 写入爬取任务
+
+
+eureka <-[#blue]- musemscore : 微服务注册
+eureka <-[#blue]- TokenCodeConverter : 微服务注册
+eureka <-[#blue]- convas : 微服务注册
+eureka <-[#blue]- ugateway : 微服务注册
+musemscore <-- ugateway : 代理
+
+nginx ---> ugateway : 反向代理
+nginx -- 机顶盒
+#+END_SRC
