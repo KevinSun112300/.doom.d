@@ -19,14 +19,14 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "monospace" :size 22))
+;;(setq doom-font (font-spec :family "monospace" :size 22))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 ;; common theme list: doom-one doom-one-light doom-city-lights doom-nord-light
 ;; modify doom-theme variable, then run M-x doom/reload-them
-(setq doom-theme 'doom-one)
+(setq doom-theme 'doom-nord-light)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -83,16 +83,16 @@
         ("Wikipedia" "https://wikipedia.org/search-redirect.php?language=en&go=Go&search=%s")))
 
 ;;; set chinese font
-(if (display-graphic-p) (dolist (charset '(kana han cjk-misc bopomofo))
-   (set-fontset-font (frame-parameter nil 'font) charset
-                     (font-spec :family "WenQuanYi Zen Hei Mono" ))))
+;; (if (display-graphic-p) (dolist (charset '(kana han cjk-misc bopomofo))
+;;    (set-fontset-font (frame-parameter nil 'font) charset
+;;                      (font-spec :family "WenQuanYi Zen Hei Mono" ))))
 ;; size 22
-(setq doom-font (font-spec :family "WenQuanYi Micro Hei Mono")
-      doom-variable-pitch-font (font-spec :family "WenQuanYi Micro Hei Mono")
-      doom-unicode-font (font-spec :family "WenQuanYi Zen Hei Mono")
-      doom-serif-font (font-spec :family "WenQuanYi Zen Hei Mono")
-      doom-big-font (font-spec :family "WenQuanYi Micro Hei Mono"))
-
+;; (setq doom-font (font-spec :family "WenQuanYi Micro Hei Mono")
+;;       doom-variable-pitch-font (font-spec :family "WenQuanYi Micro Hei Mono")
+;;       doom-unicode-font (font-spec :family "WenQuanYi Zen Hei Mono")
+;;       doom-serif-font (font-spec :family "WenQuanYi Zen Hei Mono")
+;;       doom-big-font (font-spec :family "WenQuanYi Micro Hei Mono"))
+(setq select-active-regions 'only)
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one
@@ -113,3 +113,25 @@
 (map! :leader
       (:prefix ("C-a" . "some my keys")
           :desc "avy goto char" "C-y" #'avy-goto-char))
+
+;; lsp java 设置project java SDK
+(setq lsp-java-configuration-runtimes '[(:name "JavaSE-1.8"
+						:path "/home/sun/.sdkman/candidates/java/8.0.292.hs-adpt/"
+                                                :default t)
+					(:name "JavaSE-11"
+						:path "/home/sun/.sdkman/candidates/java/11.0.11.hs-adpt/"
+						)
+                                        (:name "JavaSE-17"
+						:path "/home/sun/.sdkman/candidates/java/17.0.9.fx-zulu/"
+						)
+                                        ])
+(setq lsp-java-java-path "/home/sun/.sdkman/candidates/java/17.0.9.fx-zulu/bin/java")
+(setq lsp-java-vmargs
+      '("-XX:+UseParallelGC" "-XX:GCTimeRatio=4" "-XX:AdaptiveSizePolicyWeight=90" "-Dsun.zip.disableMemoryMapping=true" "-Xmx1G" "-Xms100m"
+        "-javaagent:/home/sun/.m2/repository/org/projectlombok/lombok/1.18.24/lombok-1.18.24.jar"
+        ;;"-Xbootclasspath/a:/home/sun/.m2/repository/org/projectlombok/lombok/1.18.24/lombok-1.18.24.jar"
+        ))
+
+
+
+(add-hook! 'python-mode-hook #'(lambda () (setq flycheck-checker 'python-mypy)))

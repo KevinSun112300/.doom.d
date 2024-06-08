@@ -71,23 +71,54 @@
 (defun  my/work/get-coder-secret()
     "unicom company coder user key key"
     (interactive)
-    (my/util/copy-string-clipboard "MzRdC@^8XL5R")
+    (kill-new "MzRdC@^8XL5R")
     )
 ;;;###autoload
 (defun  my/work/get-wotvuser-secret()
     "unicom company wotv project coder user key key"
     (interactive)
-    (my/util/copy-string-clipboard "Hdljd@1024Ylz^x")
+    (kill-new "Hdljd@1024Ylz^x")
     )
 ;;;###autoload
 (defun  my/work/get-gitlab-key()
     "unicom company wotv project coder user key key"
     (interactive)
-    (my/util/copy-string-clipboard "tJkrAmwmLisEi3hnAN4f")
+    (kill-new "tJkrAmwmLisEi3hnAN4f")
     )
 ;;;###autoload
 (defun  my/work/get-gitlab-username()
     "unicom company wotv project coder user key key"
     (interactive)
-    (my/util/copy-string-clipboard "skh7518671@qq.com")
+    (kill-new "skh7518671@qq.com")
     )
+
+
+(defun my-markdown-latextoyoudao ()
+  "将emacs markdown latex tag $$ 和$$ $$ ，转换为有道 `$$`"
+  (interactive)
+  (goto-char (point-min))
+  (while (re-search-forward "^\\(\\$\\$\\)\\(.+\\\)\\(\\$\\$\\)$" nil t)
+    (replace-match "`$\\2$`"))
+  (goto-char (point-min))
+  (while (re-search-forward "^\\(\\$\\)\\(.+\\\)\\(\\$\\)$" nil t)
+    (replace-match "`$\\2$`"))
+  (goto-char (point-min))
+  (while (re-search-forward "^\\(\\$\\$\n\\)\\(\\(.+\n\\)+\\)\\(\\$\\$\\)$" nil t)
+    (replace-match "`$\n\\2$`"))
+
+   )
+
+;;;###autoload
+(defun my-markdown-latexyoudaoToemacs ()
+  "将.md文件转换为_marktext.md文件，支持emacs语法的latex公式"
+  (interactive)
+  (let ()
+    (setq buffer-namestr (buffer-name (current-buffer)))
+
+    (when (string-suffix-p ".md" buffer-namestr)
+      (setq newfile-str (replace-regexp-in-string ".md" "_marktext.md" (buffer-name (current-buffer))))
+      (call-process-shell-command (format "sed  -e 's/`%c$/%c$/g;s/%c$`/%c$/g' %s > %s " ?\\ ?\\ ?\\ ?\\ buffer-namestr newfile-str)  nil t)
+      )
+
+    )
+  )

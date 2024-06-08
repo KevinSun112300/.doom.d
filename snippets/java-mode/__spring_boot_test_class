@@ -1,0 +1,24 @@
+# -*- mode: java-mode -*-
+# name: java_spring_boot_test_class
+# --
+package `(+java-current-package)`;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class `(+java-current-class)`
+{
+
+    @Autowired
+    `(replace-regexp-in-string "Tests$" "" (+java-current-class))` `(replace-regexp-in-string "Tests$" "" (concat (downcase (substring (+java-current-class) 0 1)) (substring (+java-current-class) 1)))`;
+
+    @Test()
+    public void $0Test() {
+
+    }
+
+}
